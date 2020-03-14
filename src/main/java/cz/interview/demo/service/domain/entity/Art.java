@@ -10,13 +10,10 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "arts")
-// @EntityListeners(AuditingEntityListener.class)@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
-// //     allowGetters = true)
-//
 public class Art implements Serializable {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @NotBlank

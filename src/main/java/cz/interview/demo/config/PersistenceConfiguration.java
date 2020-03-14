@@ -43,8 +43,7 @@ public class PersistenceConfiguration {
 
   @Bean
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-    LocalContainerEntityManagerFactoryBean em
-        = new LocalContainerEntityManagerFactoryBean();
+    LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
     em.setDataSource(dataSourceSql());
     em.setPackagesToScan(ENTITY_PACKAGE);
     em.setPersistenceUnitName(PERSISTENCE_UNIT_NAME);

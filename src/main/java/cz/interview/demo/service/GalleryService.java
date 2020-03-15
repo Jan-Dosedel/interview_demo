@@ -32,8 +32,8 @@ public class GalleryService {
     this.dozer = dozer;
   }
 
-  public List<Art> artList() {
-    return artRepository.artList();
+  public List<Art> list() {
+    return artRepository.list();
   }
 
   public Art create(ArtCreateDtoIn dtoIn) {

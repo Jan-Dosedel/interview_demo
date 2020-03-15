@@ -8,6 +8,7 @@ import static org.junit.Assert.assertNull;
 import cz.interview.demo.exception.GalleryServiceRuntimeException;
 import cz.interview.demo.service.domain.entity.Art;
 import cz.interview.demo.service.dto.art.ArtCreateDtoIn;
+import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -30,6 +31,8 @@ public class GalleryServiceTests extends AbstractGalleryServiceTest {
     assertEquals(ART_YEAR ,art.getYear());
     assertEquals(ARTIST_FIRST_NAME , art.getArtist().getFirstName());
     assertEquals(ARTIST_SURNAME , art.getArtist().getSurname());
+    assertNotNull(art.getSys().getCts());
+    assertNull(art.getSys().getMts());
     assertNotNull(art.getArtist().getSys().getCts());
     assertNull(art.getArtist().getSys().getMts());
   }
@@ -61,8 +64,8 @@ public class GalleryServiceTests extends AbstractGalleryServiceTest {
     assertEquals(1503 ,art.getYear());
     assertEquals("Leonardo" , art.getArtist().getFirstName());
     assertEquals("da Vinci" , art.getArtist().getSurname());
-    assertNotNull(art.getArtist().getSys().getCts());
-    assertNull(art.getArtist().getSys().getMts());
+    assertNotNull(art.getSys().getCts());
+    assertNull(art.getSys().getMts());
   }
 
   @Test
@@ -72,5 +75,37 @@ public class GalleryServiceTests extends AbstractGalleryServiceTest {
     expectedException.expectMessage(String.format(ART_DOES_NOT_EXIST.getMessage(), id));
     galleryService.get(prepareGetArtDtoIn(id));
   }
+
+  @Test
+  public void listArtHDSTest() {
+    List<Art> arts = galleryService.list();
+    assertEquals(7 , arts.size());
+  }
+
+  @Test
+  public void updateArtHDSTest() {
+    Long id = 1L;
+    String newTitle = "Test art title";
+    int newYer = 1985;
+    galleryService.update(prepareUpdateArtDtoIn(id, newTitle, newYer));
+    Art art = artRepository.getById(id);
+    assertEquals(newTitle ,art.getTitle());
+    assertEquals(newYer ,art.getYear());
+    assertEquals("Leonardo" , art.getArtist().getFirstName());
+    assertEquals("da Vinci" , art.getArtist().getSurname());
+    assertNotNull(art.getSys().getCts());
+    assertNotNull(art.getSys().getMts());
+  }
+
+  @Test
+  public void updateArtNotExistTest() {
+    Long id = 50L;
+    String newTitle = "Test art title";
+    int newYer = 1985;
+    expectedException.expect(GalleryServiceRuntimeException.class);
+    expectedException.expectMessage(String.format(ART_DOES_NOT_EXIST.getMessage(), id));
+    galleryService.update(prepareUpdateArtDtoIn(id, newTitle, newYer));
+  }
+
 
 }

@@ -7,6 +7,7 @@ import cz.interview.demo.service.GalleryService;
 import cz.interview.demo.service.dto.art.ArtCreateDtoIn;
 import cz.interview.demo.service.dto.art.ArtDeleteDtoIn;
 import cz.interview.demo.service.dto.art.ArtGetDtoIn;
+import cz.interview.demo.service.dto.art.ArtUpdateDtoIn;
 import cz.interview.demo.service.dto.artist.ArtistDto;
 import javax.inject.Inject;
 import org.junit.runner.RunWith;
@@ -55,4 +56,13 @@ abstract class AbstractGalleryServiceTest {
     dtoIn.setId(id);
     return dtoIn;
   }
+
+  protected ArtUpdateDtoIn prepareUpdateArtDtoIn(Long id, String title, int year){
+    ArtUpdateDtoIn dtoIn =  new ArtUpdateDtoIn();
+    dtoIn.setId(id);
+    dtoIn.setTitle(title);
+    dtoIn.setYear(year);
+    return dtoIn;
+  }
+
 }

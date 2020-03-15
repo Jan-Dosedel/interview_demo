@@ -28,7 +28,7 @@ public class ArtController {
 
   @GetMapping("/list")
   public List<Art> artList() {
-    return galleryService.artList();
+    return galleryService.list();
   }
 
   @PostMapping("/create")

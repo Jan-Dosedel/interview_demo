@@ -17,7 +17,7 @@ public class ArtJpaRepository implements ArtRepository {
   }
 
   @Override
-  public List<Art> artList() {
+  public List<Art> list() {
     Query query = em.createQuery("select a from Art a");
     return (List<Art>) query.getResultList();
   }

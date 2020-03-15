@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories("cz.interview.demo.dao")
 public class PersistenceConfiguration {
 
-  private static final String PERSISTENCE_UNIT_NAME = "mainPU";
+  private static final String PERSISTENCE_UNIT_NAME = "hibernateJpaPU";
   private static final String ENTITY_PACKAGE = "cz.interview.demo.service.domain.entity";
 
   // DB config

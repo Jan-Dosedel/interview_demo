@@ -1,6 +1,7 @@
 package cz.interview.demo.service;
 
 import cz.interview.demo.dao.repository.ArtRepository;
+import cz.interview.demo.helper.SysAttributesHelper;
 import cz.interview.demo.service.domain.entity.Art;
 import cz.interview.demo.service.dto.ArtCreateDtoIn;
 import cz.interview.demo.service.dto.ArtGetDtoIn;
@@ -29,6 +30,7 @@ public class ArtService {
 
   public void create(ArtCreateDtoIn dtoIn) {
     Art art = dozer.map(dtoIn, Art.class);
+    // art.setSystemAttributes(SysAttributesHelper.getCreateSysAttributes());
     artRepository.create(art);
   }
 

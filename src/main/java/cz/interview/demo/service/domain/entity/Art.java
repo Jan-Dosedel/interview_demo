@@ -1,31 +1,26 @@
 package cz.interview.demo.service.domain.entity;
 
-import java.io.Serializable;
+import cz.interview.demo.service.domain.entity.basic.AbstractEntity;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+
 @Entity
 @Table(name = "arts")
-public class Art implements Serializable {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+public class Art extends AbstractEntity {
 
   @NotBlank
   private String title;
 
-  public Long getId() {
-    return id;
-  }
+  private int year;
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "artist_id", referencedColumnName = "id")
+  private Artist artist;
 
   public String getTitle() {
     return title;
@@ -33,5 +28,21 @@ public class Art implements Serializable {
 
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  public Artist getArtist() {
+    return artist;
+  }
+
+  public void setArtist(Artist artist) {
+    this.artist = artist;
+  }
+
+  public int getYear() {
+    return year;
+  }
+
+  public void setYear(int year) {
+    this.year = year;
   }
 }

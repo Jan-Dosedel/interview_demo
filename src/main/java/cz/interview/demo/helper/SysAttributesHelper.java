@@ -1,26 +1,22 @@
 package cz.interview.demo.helper;
 
-
-import java.text.SimpleDateFormat;
+import cz.interview.demo.service.domain.entity.basic.SystemAttributes;
+import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 
 public class SysAttributesHelper {
 
-  private static final String DATE_FORMAT = "yyyy-MM-dd 'at' HH:mm:ss z";
-  private static final SimpleDateFormat STRING_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
+  public static SystemAttributes getCreateSysAttributes(){
+   SystemAttributes systemAttributes =  new SystemAttributes();
+    Timestamp timestamp = Timestamp.from(ZonedDateTime.now().toInstant());
+    systemAttributes.setCts(timestamp);
+    return systemAttributes;
+  }
 
-  // public static SystemAttributes getCreateSysAttributes(){
-  //  SystemAttributes systemAttributes =  new SystemAttributes();
-  //   Timestamp timestamp = Timestamp.from(ZonedDateTime.now().toInstant());
-  //   // systemAttributes.setCts(STRING_FORMATTER.format(new Date(System.currentTimeMillis())));
-  //   systemAttributes.setCts(timestamp);
-  //   return systemAttributes;
-  // }
-
-  // public static SystemAttributes convertSysAttributes(){
-  //   SystemAttributes attribute =  new SystemAttributes();
-  //   Timestamp timestamp = Timestamp.from(ZonedDateTime.now().toInstant());
-  //   attribute.setCts(STRING_FORMATTER.format(new Date(System.currentTimeMillis())));
-  //   return attribute;
-  // }
+  public static SystemAttributes updateSysAttributes(SystemAttributes systemAttributes){
+    Timestamp timestamp = Timestamp.from(ZonedDateTime.now().toInstant());
+    systemAttributes.setMts(timestamp);
+    return systemAttributes;
+  }
 
 }

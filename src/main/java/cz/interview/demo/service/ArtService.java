@@ -1,14 +1,15 @@
 package cz.interview.demo.service;
 
 import cz.interview.demo.dao.repository.ArtRepository;
+import cz.interview.demo.dao.repository.SysRepository;
 import cz.interview.demo.helper.SysAttributesHelper;
 import cz.interview.demo.service.domain.entity.Art;
 import cz.interview.demo.service.dto.ArtCreateDtoIn;
 import cz.interview.demo.service.dto.ArtGetDtoIn;
 import cz.interview.demo.service.dto.ArtUpdateDtoIn;
 import java.util.List;
-import javax.inject.Inject;
 import org.dozer.DozerBeanMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class ArtService {
 
   private final ArtRepository artRepository;
+  private final SysRepository sysRepository;
   private final DozerBeanMapper dozer;
 
-  public ArtService(ArtRepository artRepository, DozerBeanMapper dozer) {
+  public ArtService(ArtRepository artRepository, SysRepository sysRepository, DozerBeanMapper dozer) {
     this.artRepository = artRepository;
+    this.sysRepository = sysRepository;
     this.dozer = dozer;
   }
 
@@ -30,7 +33,7 @@ public class ArtService {
 
   public void create(ArtCreateDtoIn dtoIn) {
     Art art = dozer.map(dtoIn, Art.class);
-    // art.setSystemAttributes(SysAttributesHelper.getCreateSysAttributes());
+    art.setSys(SysAttributesHelper.getCreateSysAttributes());
     artRepository.create(art);
   }
 
@@ -45,8 +48,11 @@ public class ArtService {
   }
 
   public void update(ArtUpdateDtoIn dtoIn) {
-    Art art = dozer.map(dtoIn, Art.class);
+
     // TODO validation on id
+    Art art = artRepository.getById(dtoIn.getId());
+    art.setSys(SysAttributesHelper.updateSysAttributes(art.getSys()));
+    BeanUtils.copyProperties(dtoIn, art);
     artRepository.update(art);
   }
 }

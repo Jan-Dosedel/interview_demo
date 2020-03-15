@@ -9,10 +9,13 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ArtSqlRepository implements ArtRepository {
+public class ArtJpaRepository implements ArtRepository {
 
-  @Inject
-  private EntityManager em;
+  private final EntityManager em;
+
+  public ArtJpaRepository(EntityManager em) {
+    this.em = em;
+  }
 
   @Override
   public List<Art> artList() {

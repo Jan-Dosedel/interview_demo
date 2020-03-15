@@ -1,12 +1,11 @@
 package cz.interview.demo.service;
 
 import cz.interview.demo.dao.repository.ArtRepository;
-import cz.interview.demo.dao.repository.SysRepository;
 import cz.interview.demo.helper.SysAttributesHelper;
 import cz.interview.demo.service.domain.entity.Art;
-import cz.interview.demo.service.dto.ArtCreateDtoIn;
-import cz.interview.demo.service.dto.ArtGetDtoIn;
-import cz.interview.demo.service.dto.ArtUpdateDtoIn;
+import cz.interview.demo.service.dto.art.ArtCreateDtoIn;
+import cz.interview.demo.service.dto.art.ArtGetDtoIn;
+import cz.interview.demo.service.dto.art.ArtUpdateDtoIn;
 import java.util.List;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.BeanUtils;
@@ -18,12 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class ArtService {
 
   private final ArtRepository artRepository;
-  private final SysRepository sysRepository;
   private final DozerBeanMapper dozer;
 
-  public ArtService(ArtRepository artRepository, SysRepository sysRepository, DozerBeanMapper dozer) {
+  public ArtService(ArtRepository artRepository, DozerBeanMapper dozer) {
     this.artRepository = artRepository;
-    this.sysRepository = sysRepository;
     this.dozer = dozer;
   }
 
@@ -33,7 +30,7 @@ public class ArtService {
 
   public void create(ArtCreateDtoIn dtoIn) {
     Art art = dozer.map(dtoIn, Art.class);
-    art.setSys(SysAttributesHelper.getCreateSysAttributes());
+    SysAttributesHelper.initSysAttributes(art);
     artRepository.create(art);
   }
 
@@ -51,7 +48,8 @@ public class ArtService {
 
     // TODO validation on id
     Art art = artRepository.getById(dtoIn.getId());
-    art.setSys(SysAttributesHelper.updateSysAttributes(art.getSys()));
+    SysAttributesHelper.updateSysAttributes(art);
+    // do shallow copy, update only art attributes
     BeanUtils.copyProperties(dtoIn, art);
     artRepository.update(art);
   }

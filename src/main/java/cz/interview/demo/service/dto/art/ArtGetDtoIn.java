@@ -1,8 +1,8 @@
-package cz.interview.demo.service.dto;
+package cz.interview.demo.service.dto.art;
 
 import java.util.Objects;
 
-public class ArtDeleteDtoIn {
+public class ArtGetDtoIn {
 
   private long id;
 
@@ -22,7 +22,7 @@ public class ArtDeleteDtoIn {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ArtDeleteDtoIn that = (ArtDeleteDtoIn) o;
+    ArtGetDtoIn that = (ArtGetDtoIn) o;
     return id == that.id;
   }
 
@@ -33,7 +33,7 @@ public class ArtDeleteDtoIn {
 
   @Override
   public String toString() {
-    return "ArtDeleteDtoIn{" +
+    return "ArtGetDtoIn{" +
         "id=" + id +
         '}';
   }

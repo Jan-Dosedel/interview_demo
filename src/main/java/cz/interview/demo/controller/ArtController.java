@@ -2,13 +2,11 @@ package cz.interview.demo.controller;
 
 import cz.interview.demo.service.ArtService;
 import cz.interview.demo.service.domain.entity.Art;
-import cz.interview.demo.service.dto.ArtCreateDtoIn;
-import cz.interview.demo.service.dto.ArtGetDtoIn;
-import cz.interview.demo.service.dto.ArtUpdateDtoIn;
+import cz.interview.demo.service.dto.art.ArtCreateDtoIn;
+import cz.interview.demo.service.dto.art.ArtGetDtoIn;
+import cz.interview.demo.service.dto.art.ArtUpdateDtoIn;
 import java.util.List;
-import javax.inject.Inject;
 import javax.validation.Valid;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

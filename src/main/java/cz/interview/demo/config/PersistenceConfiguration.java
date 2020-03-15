@@ -1,20 +1,13 @@
 package cz.interview.demo.config;
 
 import java.util.Properties;
-import javax.annotation.PostConstruct;
 import javax.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.AbstractDriverBasedDataSource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.init.DatabasePopulator;
-import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;

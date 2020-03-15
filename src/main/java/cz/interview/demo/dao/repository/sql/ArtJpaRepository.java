@@ -23,8 +23,9 @@ public class ArtJpaRepository implements ArtRepository {
   }
 
   @Override
-  public void create(Art art) {
+  public Art create(Art art) {
     em.persist(art);
+    return art;
   }
 
   @Override
@@ -46,7 +47,8 @@ public class ArtJpaRepository implements ArtRepository {
   }
 
   @Override
-  public void update(Art art) {
+  public Art update(Art art) {
     em.merge(art);
+    return art;
   }
 }

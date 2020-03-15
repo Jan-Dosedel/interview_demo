@@ -4,8 +4,8 @@ plugins {
 	id 'java'
 }
 
-group = 'cz.exmple'
-version = '0.0.1-SNAPSHOT'
+group = 'cz.interview.demo'
+version = '1.0.0-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
@@ -31,9 +31,11 @@ dependencies {
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+	testImplementation('org.springframework.boot:spring-boot-starter-test:') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	testCompile group: 'junit', name: 'junit', version: '4.12'
+	testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.13.RELEASE'
 }
 
 test {

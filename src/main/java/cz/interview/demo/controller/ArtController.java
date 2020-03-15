@@ -32,8 +32,8 @@ public class ArtController {
   }
 
   @PostMapping("/create")
-  public void create(@Valid @RequestBody ArtCreateDtoIn dtoIn) {
-    galleryService.create(dtoIn);
+  public Art create(@Valid @RequestBody ArtCreateDtoIn dtoIn) {
+    return galleryService.create(dtoIn);
   }
 
   @GetMapping("/get")
@@ -47,8 +47,8 @@ public class ArtController {
   }
 
   @PutMapping("/update")
-  public void update(@Valid @RequestBody ArtUpdateDtoIn dtoIn) {
-    galleryService.update(dtoIn);
+  public Art update(@Valid @RequestBody ArtUpdateDtoIn dtoIn) {
+    return galleryService.update(dtoIn);
   }
 
 }

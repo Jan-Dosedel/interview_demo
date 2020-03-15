@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 public interface ArtRepository {
 
   List<Art> artList();
-  void create(Art art);
+  Art create(Art art);
   Art getById(Long id);
   void delete(Art art);
   void deleteById(long id);
-  void update(Art art);
+  Art update(Art art);
 }

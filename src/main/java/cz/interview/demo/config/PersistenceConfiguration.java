@@ -32,6 +32,10 @@ public class PersistenceConfiguration {
   private String dbName;
   @Value("${database.connectionString:jdbc:mysql://%s:%s/%s?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false}")
   private String connectionString;
+  @Value("${database.user}")
+  private String user;
+  @Value("${database.password}")
+  private String password;
   // Hibernate config
   @Value("${hibernate.ddl:none}")
   private String hibernateDdl;
@@ -58,9 +62,8 @@ public class PersistenceConfiguration {
     DriverManagerDataSource dataSource = new DriverManagerDataSource();
     dataSource.setUrl(getConnectionString());
     dataSource.setDriverClassName("org.h2.Driver");
-    // FIXME move to password file
-    dataSource.setUsername("root");
-    dataSource.setPassword("admin");
+    dataSource.setUsername(this.user);
+    dataSource.setPassword(this.password);
     return dataSource;
   }
 

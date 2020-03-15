@@ -36,7 +36,7 @@ public class GalleryService {
     return artRepository.artList();
   }
 
-  public void create(ArtCreateDtoIn dtoIn) {
+  public Art create(ArtCreateDtoIn dtoIn) {
 
     Art art = dozer.map(dtoIn, Art.class);
     Artist artist = artistRepository.getByName(dtoIn.getArtist().getFirstName(), dtoIn.getArtist().getSurname());
@@ -46,7 +46,7 @@ public class GalleryService {
     }
 
     SysAttributesHelper.initSysAttributes(art);
-    artRepository.create(art);
+    return artRepository.create(art);
   }
 
   public Art get(ArtGetDtoIn dtoIn) {
@@ -71,7 +71,7 @@ public class GalleryService {
     artRepository.deleteById(dtoIn.getId());
   }
 
-  public void update(ArtUpdateDtoIn dtoIn) {
+  public Art update(ArtUpdateDtoIn dtoIn) {
 
     Art art = artRepository.getById(dtoIn.getId());
 
@@ -82,6 +82,6 @@ public class GalleryService {
     SysAttributesHelper.updateSysAttributes(art);
     // do shallow copy, update only art attributes
     BeanUtils.copyProperties(dtoIn, art);
-    artRepository.update(art);
+    return artRepository.update(art);
   }
 }

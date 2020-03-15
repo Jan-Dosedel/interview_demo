@@ -1,5 +1,6 @@
 package cz.interview.demo.service.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import cz.interview.demo.service.domain.entity.basic.AbstractEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "artists")
+@JsonIgnoreProperties(value = { "id" })
 public class Artist extends AbstractEntity {
 
   @Column(name="first_name")

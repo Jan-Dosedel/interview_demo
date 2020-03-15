@@ -3,9 +3,11 @@ package cz.interview.demo.service;
 import static cz.interview.demo.exception.ArtServiceRuntimeException.Error.ART_DOES_NOT_EXIST;
 
 import cz.interview.demo.dao.repository.ArtRepository;
+import cz.interview.demo.dao.repository.ArtistRepository;
 import cz.interview.demo.exception.ArtServiceRuntimeException;
 import cz.interview.demo.helper.SysAttributesHelper;
 import cz.interview.demo.service.domain.entity.Art;
+import cz.interview.demo.service.domain.entity.Artist;
 import cz.interview.demo.service.dto.art.ArtCreateDtoIn;
 import cz.interview.demo.service.dto.art.ArtDeleteDtoIn;
 import cz.interview.demo.service.dto.art.ArtGetDtoIn;
@@ -18,13 +20,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class ArtService {
+public class GalleryService {
 
   private final ArtRepository artRepository;
+  private final ArtistRepository artistRepository;
   private final DozerBeanMapper dozer;
 
-  public ArtService(ArtRepository artRepository, DozerBeanMapper dozer) {
+  public GalleryService(ArtRepository artRepository, ArtistRepository artistRepository, DozerBeanMapper dozer) {
     this.artRepository = artRepository;
+    this.artistRepository = artistRepository;
     this.dozer = dozer;
   }
 
@@ -33,7 +37,14 @@ public class ArtService {
   }
 
   public void create(ArtCreateDtoIn dtoIn) {
+
     Art art = dozer.map(dtoIn, Art.class);
+    Artist artist = artistRepository.getByName(dtoIn.getArtist().getFirstName(), dtoIn.getArtist().getSurname());
+
+    if(artist != null){
+      art.setArtist(artist);
+    }
+
     SysAttributesHelper.initSysAttributes(art);
     artRepository.create(art);
   }

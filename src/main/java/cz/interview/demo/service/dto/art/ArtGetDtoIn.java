@@ -1,7 +1,10 @@
 package cz.interview.demo.service.dto.art;
 
+import javax.validation.constraints.NotNull;
+
 public class ArtGetDtoIn {
 
+  @NotNull
   private Long id;
 
   public Long getId() {

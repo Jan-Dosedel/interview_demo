@@ -1,6 +1,6 @@
 package cz.interview.demo.controller;
 
-import cz.interview.demo.service.ArtService;
+import cz.interview.demo.service.GalleryService;
 import cz.interview.demo.service.domain.entity.Art;
 import cz.interview.demo.service.dto.art.ArtCreateDtoIn;
 import cz.interview.demo.service.dto.art.ArtDeleteDtoIn;
@@ -20,35 +20,35 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/art")
 public class ArtController {
 
-  private final ArtService artService;
+  private final GalleryService galleryService;
 
-  public ArtController(ArtService artService) {
-    this.artService = artService;
+  public ArtController(GalleryService galleryService) {
+    this.galleryService = galleryService;
   }
 
   @GetMapping("/list")
   public List<Art> artList() {
-    return artService.artList();
+    return galleryService.artList();
   }
 
   @PostMapping("/create")
   public void create(@Valid @RequestBody ArtCreateDtoIn dtoIn) {
-    artService.create(dtoIn);
+    galleryService.create(dtoIn);
   }
 
   @GetMapping("/get")
   public Art get(@Valid @RequestBody ArtGetDtoIn dtoIn) {
-    return artService.get(dtoIn);
+    return galleryService.get(dtoIn);
   }
 
   @DeleteMapping("/delete")
   public void delete(@Valid @RequestBody ArtDeleteDtoIn dtoIn) {
-    artService.delete(dtoIn);
+    galleryService.delete(dtoIn);
   }
 
   @PutMapping("/update")
   public void update(@Valid @RequestBody ArtUpdateDtoIn dtoIn) {
-    artService.update(dtoIn);
+    galleryService.update(dtoIn);
   }
 
 }

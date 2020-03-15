@@ -25,7 +25,7 @@ INSERT INTO artists (sys_attributes_id, first_name, surname) VALUES ('6', 'Salva
 INSERT INTO artists (sys_attributes_id, first_name, surname) VALUES ('7', 'René', 'Magritte');
 
 ## arts insertion
-INSERT INTO arts (artist_id, sys_attributes_id, title, year) VALUES ('1', '1', 'Mona Lisa', '1503');
+INSERT INTO arts (artist_id, sys_attributes_id, title, year) VALUES ('1', '8', 'Mona Lisa', '1503');
 insert into arts (artist_id, sys_attributes_id, title, year) values ('2', '9', 'Saturn devouring his son', '1819');
 insert into arts (artist_id, sys_attributes_id, title, year) values ('3', '10', 'The starry night', '1889');
 insert into arts (artist_id, sys_attributes_id, title, year) values ('4', '11', 'Girl with a pearl earring', '1665');

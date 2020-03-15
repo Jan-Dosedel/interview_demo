@@ -1,9 +1,11 @@
 package cz.interview.demo.service.dto.art;
 
 import cz.interview.demo.service.dto.artist.ArtistDto;
+import javax.validation.constraints.NotEmpty;
 
 public class ArtDto {
 
+  @NotEmpty
   private String title;
   private int year;
   private ArtistDto artist;

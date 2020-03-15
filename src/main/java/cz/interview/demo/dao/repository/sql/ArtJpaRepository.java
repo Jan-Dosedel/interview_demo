@@ -3,7 +3,6 @@ package cz.interview.demo.dao.repository.sql;
 import cz.interview.demo.dao.repository.ArtRepository;
 import cz.interview.demo.service.domain.entity.Art;
 import java.util.List;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;

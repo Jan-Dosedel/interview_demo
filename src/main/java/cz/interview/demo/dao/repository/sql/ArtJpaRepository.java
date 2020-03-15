@@ -42,6 +42,11 @@ public class ArtJpaRepository implements ArtRepository {
   }
 
   @Override
+  public void delete(Art art) {
+      em.remove(art);
+  }
+
+  @Override
   public void update(Art art) {
     em.merge(art);
   }

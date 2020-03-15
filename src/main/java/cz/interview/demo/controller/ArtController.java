@@ -3,6 +3,7 @@ package cz.interview.demo.controller;
 import cz.interview.demo.service.ArtService;
 import cz.interview.demo.service.domain.entity.Art;
 import cz.interview.demo.service.dto.art.ArtCreateDtoIn;
+import cz.interview.demo.service.dto.art.ArtDeleteDtoIn;
 import cz.interview.demo.service.dto.art.ArtGetDtoIn;
 import cz.interview.demo.service.dto.art.ArtUpdateDtoIn;
 import java.util.List;
@@ -41,7 +42,7 @@ public class ArtController {
   }
 
   @DeleteMapping("/delete")
-  public void delete(@Valid @RequestBody ArtGetDtoIn dtoIn) {
+  public void delete(@Valid @RequestBody ArtDeleteDtoIn dtoIn) {
     artService.delete(dtoIn);
   }
 

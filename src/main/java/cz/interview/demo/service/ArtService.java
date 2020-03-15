@@ -1,9 +1,13 @@
 package cz.interview.demo.service;
 
+import static cz.interview.demo.exception.ArtServiceRuntimeException.Error.ART_DOES_NOT_EXIST;
+
 import cz.interview.demo.dao.repository.ArtRepository;
+import cz.interview.demo.exception.ArtServiceRuntimeException;
 import cz.interview.demo.helper.SysAttributesHelper;
 import cz.interview.demo.service.domain.entity.Art;
 import cz.interview.demo.service.dto.art.ArtCreateDtoIn;
+import cz.interview.demo.service.dto.art.ArtDeleteDtoIn;
 import cz.interview.demo.service.dto.art.ArtGetDtoIn;
 import cz.interview.demo.service.dto.art.ArtUpdateDtoIn;
 import java.util.List;
@@ -35,19 +39,35 @@ public class ArtService {
   }
 
   public Art get(ArtGetDtoIn dtoIn) {
+
     Art art = artRepository.getById(dtoIn.getId());
-    // TODO add exception to missing object
+
+    if(art == null){
+      throw new ArtServiceRuntimeException(ART_DOES_NOT_EXIST, dtoIn.getId());
+    }
+
     return art;
   }
 
-  public void delete(ArtGetDtoIn dtoIn) {
+  public void delete(ArtDeleteDtoIn dtoIn) {
+
+    Art art = artRepository.getById(dtoIn.getId());
+
+    if(art == null){
+      throw new ArtServiceRuntimeException(ART_DOES_NOT_EXIST, dtoIn.getId());
+    }
+
     artRepository.deleteById(dtoIn.getId());
   }
 
   public void update(ArtUpdateDtoIn dtoIn) {
 
-    // TODO validation on id
     Art art = artRepository.getById(dtoIn.getId());
+
+    if(art == null){
+      throw new ArtServiceRuntimeException(ART_DOES_NOT_EXIST, dtoIn.getId());
+    }
+
     SysAttributesHelper.updateSysAttributes(art);
     // do shallow copy, update only art attributes
     BeanUtils.copyProperties(dtoIn, art);

@@ -10,6 +10,7 @@ public interface ArtRepository {
   List<Art> artList();
   void create(Art art);
   Art getById(Long id);
+  void delete(Art art);
   void deleteById(long id);
   void update(Art art);
 }

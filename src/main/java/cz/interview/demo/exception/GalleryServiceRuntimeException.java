@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class ArtServiceRuntimeException extends DemoAppRuntimeException {
+public class GalleryServiceRuntimeException extends DemoAppRuntimeException {
 
   public enum Error {
     ART_DOES_NOT_EXIST("Art (id %s) does not exist.");
@@ -20,7 +20,7 @@ public class ArtServiceRuntimeException extends DemoAppRuntimeException {
     }
   }
 
-  public ArtServiceRuntimeException(Error error, Long id) {
+  public GalleryServiceRuntimeException(Error error, Long id) {
     super(String.format(error.getMessage(), id));
   }
 

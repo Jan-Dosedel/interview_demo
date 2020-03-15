@@ -1,10 +1,10 @@
 package cz.interview.demo.service;
 
-import static cz.interview.demo.exception.ArtServiceRuntimeException.Error.ART_DOES_NOT_EXIST;
+import static cz.interview.demo.exception.GalleryServiceRuntimeException.Error.ART_DOES_NOT_EXIST;
 
 import cz.interview.demo.dao.repository.ArtRepository;
 import cz.interview.demo.dao.repository.ArtistRepository;
-import cz.interview.demo.exception.ArtServiceRuntimeException;
+import cz.interview.demo.exception.GalleryServiceRuntimeException;
 import cz.interview.demo.helper.SysAttributesHelper;
 import cz.interview.demo.service.domain.entity.Art;
 import cz.interview.demo.service.domain.entity.Artist;
@@ -54,7 +54,7 @@ public class GalleryService {
     Art art = artRepository.getById(dtoIn.getId());
 
     if(art == null){
-      throw new ArtServiceRuntimeException(ART_DOES_NOT_EXIST, dtoIn.getId());
+      throw new GalleryServiceRuntimeException(ART_DOES_NOT_EXIST, dtoIn.getId());
     }
 
     return art;
@@ -65,7 +65,7 @@ public class GalleryService {
     Art art = artRepository.getById(dtoIn.getId());
 
     if(art == null){
-      throw new ArtServiceRuntimeException(ART_DOES_NOT_EXIST, dtoIn.getId());
+      throw new GalleryServiceRuntimeException(ART_DOES_NOT_EXIST, dtoIn.getId());
     }
 
     artRepository.deleteById(dtoIn.getId());
@@ -76,7 +76,7 @@ public class GalleryService {
     Art art = artRepository.getById(dtoIn.getId());
 
     if(art == null){
-      throw new ArtServiceRuntimeException(ART_DOES_NOT_EXIST, dtoIn.getId());
+      throw new GalleryServiceRuntimeException(ART_DOES_NOT_EXIST, dtoIn.getId());
     }
 
     SysAttributesHelper.updateSysAttributes(art);

@@ -6,6 +6,7 @@ import cz.interview.demo.dao.repository.ArtistRepository;
 import cz.interview.demo.service.GalleryService;
 import cz.interview.demo.service.dto.art.ArtCreateDtoIn;
 import cz.interview.demo.service.dto.art.ArtDeleteDtoIn;
+import cz.interview.demo.service.dto.art.ArtGetDtoIn;
 import cz.interview.demo.service.dto.artist.ArtistDto;
 import javax.inject.Inject;
 import org.junit.runner.RunWith;
@@ -45,6 +46,12 @@ abstract class AbstractGalleryServiceTest {
 
   protected ArtDeleteDtoIn prepareDeleteArtDtoIn(Long id){
     ArtDeleteDtoIn dtoIn =  new ArtDeleteDtoIn();
+    dtoIn.setId(id);
+    return dtoIn;
+  }
+
+  protected ArtGetDtoIn prepareGetArtDtoIn(Long id){
+    ArtGetDtoIn dtoIn =  new ArtGetDtoIn();
     dtoIn.setId(id);
     return dtoIn;
   }

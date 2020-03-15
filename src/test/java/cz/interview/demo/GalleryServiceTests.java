@@ -11,7 +11,10 @@ import cz.interview.demo.service.dto.art.ArtCreateDtoIn;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 public class GalleryServiceTests extends AbstractGalleryServiceTest {
 
   @Rule
@@ -47,6 +50,27 @@ public class GalleryServiceTests extends AbstractGalleryServiceTest {
     expectedException.expect(GalleryServiceRuntimeException.class);
     expectedException.expectMessage(String.format(ART_DOES_NOT_EXIST.getMessage(), id));
     galleryService.delete(prepareDeleteArtDtoIn(id));
+  }
+
+  @Test
+  public void getArtHDSTest() {
+    Long id = 1L;
+    artRepository.getById(id);
+    Art art = galleryService.get(prepareGetArtDtoIn(id));
+    assertEquals("Mona Lisa" ,art.getTitle());
+    assertEquals(1503 ,art.getYear());
+    assertEquals("Leonardo" , art.getArtist().getFirstName());
+    assertEquals("da Vinci" , art.getArtist().getSurname());
+    assertNotNull(art.getArtist().getSys().getCts());
+    assertNull(art.getArtist().getSys().getMts());
+  }
+
+  @Test
+  public void getArtNotExistTest() {
+    Long id = 50L;
+    expectedException.expect(GalleryServiceRuntimeException.class);
+    expectedException.expectMessage(String.format(ART_DOES_NOT_EXIST.getMessage(), id));
+    galleryService.get(prepareGetArtDtoIn(id));
   }
 
 }

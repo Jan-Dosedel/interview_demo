@@ -8,6 +8,9 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
+/**
+ * JPA implementation of a artist repository interface {@ArtistRepository}.
+ */
 @Repository
 public class ArtistJpaRepository implements ArtistRepository {
 

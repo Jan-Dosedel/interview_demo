@@ -7,6 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
+/**
+ * JPA implementation of a art repository interface {@ArtRepository}.
+ */
 @Repository
 public class ArtJpaRepository implements ArtRepository {
 

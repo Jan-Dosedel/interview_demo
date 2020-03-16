@@ -18,6 +18,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Simple service for managing arts.
+ */
 @Service
 @Transactional
 public class GalleryService {
@@ -26,6 +29,13 @@ public class GalleryService {
   private final ArtistRepository artistRepository;
   private final DozerBeanMapper dozer;
 
+  /**
+   * Full constructor for instantiating gallery service.
+   *
+   * @param artRepository repository for persisting {@Art} entities
+   * @param artistRepository repository for persisting {@Artist} entities
+   * @param dozer object mapper
+   */
   public GalleryService(ArtRepository artRepository, ArtistRepository artistRepository, DozerBeanMapper dozer) {
     this.artRepository = artRepository;
     this.artistRepository = artistRepository;

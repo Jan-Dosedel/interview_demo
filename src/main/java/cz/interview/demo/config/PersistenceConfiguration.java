@@ -15,6 +15,9 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * Configuration for persistent layer of the application.
+ */
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories("cz.interview.demo.dao")
@@ -23,7 +26,7 @@ public class PersistenceConfiguration {
   private static final String PERSISTENCE_UNIT_NAME = "hibernateJpaPU";
   private static final String ENTITY_PACKAGE = "cz.interview.demo.service.domain.entity";
 
-  // DB config
+  // DB configuration parameters
   @Value("${database.host:localhost}")
   private String dbHost;
   @Value("${database.port:3306}")
@@ -36,15 +39,23 @@ public class PersistenceConfiguration {
   private String user;
   @Value("${database.password}")
   private String password;
-  // Hibernate config
+  // Hibernate configuration parameters
   @Value("${hibernate.ddl:none}")
   private String hibernateDdl;
   @Value("${hibernate.dialect:org.hibernate.dialect.MySQL8Dialect}")
   private String hibernateDialect;
   @Value("${hibernate.import:/scripts/import.sql}")
   private String hibernateImport;
+  @Value("${hibernate.driver:org.h2.Driver}")
+  private String hibernateDriver;
 
 
+
+  /**
+   * Factory for creating entity manager {@EntityManager} for managing persisted beans.
+   *
+   * @return new instance of a entity manager
+   */
   @Bean
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
     LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -57,16 +68,27 @@ public class PersistenceConfiguration {
     return em;
   }
 
+  /**
+   * Definition of the data source {@DataSource}.
+   *
+   * @return data source for specific driver
+   */
   @Bean(name = "dataSourceSql")
   public DriverManagerDataSource dataSourceSql() {
     DriverManagerDataSource dataSource = new DriverManagerDataSource();
     dataSource.setUrl(getConnectionString());
-    dataSource.setDriverClassName("org.h2.Driver");
+    dataSource.setDriverClassName(this.hibernateDriver);
     dataSource.setUsername(this.user);
     dataSource.setPassword(this.password);
     return dataSource;
   }
 
+  /**
+   * Factory for transaction manager {@TransactionManager} for managing persisted beans.
+   *
+   * @param emf entity manager instance
+   * @return new instance of a transaction manager
+   */
   @Bean
   public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
     JpaTransactionManager transactionManager = new JpaTransactionManager();
@@ -74,11 +96,21 @@ public class PersistenceConfiguration {
     return transactionManager;
   }
 
+  /**
+   * Bean definition for the exception bean post processor.
+   *
+   * @return new instance of a bean post processor {@BeanPostProcessor}.
+   */
   @Bean
   public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
     return new PersistenceExceptionTranslationPostProcessor();
   }
 
+  /**
+   *  Returns additional parameters for configuration persistent layer.
+   *
+   * @return additional configuration parameters
+   */
   private Properties additionalProperties() {
     Properties properties = new Properties();
     properties.setProperty("hibernate.hbm2ddl.auto", this.hibernateDdl);
@@ -88,6 +120,10 @@ public class PersistenceConfiguration {
     return properties;
   }
 
+  /**
+   * Returns connection string compound from the deploy parameters to the storage.
+   * @return string that represents connection string
+   */
   private String getConnectionString() {
     return String.format(this.connectionString, this.dbHost, this.dbPort, this.dbName);
   }

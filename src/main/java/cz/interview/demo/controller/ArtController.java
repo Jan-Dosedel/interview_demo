@@ -8,6 +8,7 @@ import cz.interview.demo.service.dto.art.ArtGetDtoIn;
 import cz.interview.demo.service.dto.art.ArtUpdateDtoIn;
 import java.util.List;
 import javax.validation.Valid;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +40,7 @@ public class ArtController {
    *
    * @return list of all arts.
    */
+  @CrossOrigin(origins = "http://localhost:8082")
   @GetMapping("/list")
   public List<Art> artList() {
     return galleryService.list();

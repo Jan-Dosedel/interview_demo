@@ -15,6 +15,9 @@ import org.junit.rules.ExpectedException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
+/**
+ * Class with test cases for the gallery service {@GalleryService}
+ */
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 public class GalleryServiceTests extends AbstractGalleryServiceTest {
 
